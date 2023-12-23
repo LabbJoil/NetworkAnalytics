@@ -1,0 +1,32 @@
+﻿<Window x:Class="NADesktop.Windows.CaptchaSolverWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:PersonalElements="clr-namespace:NADesktop.Personal_Elements"
+        xmlns:local="clr-namespace:NADesktop.Windows"
+        mc:Ignorable="d"
+        Title="CaptchaSolverWindow" Height="450" Width="800">
+    <Grid Background="#FF1D132E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <Rectangle x:Name="OverlayRectangle" Fill="DarkGray" Opacity="0.3" Visibility="Hidden" Grid.ColumnSpan="3"/>
+        <TextBlock Text="Captcha" HorizontalAlignment="Center" FontFamily="Tahoma" FontSize="30" FontWeight="Bold" Foreground="White" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
+        <WebBrowser x:Name="Web" Grid.Row="3" Grid.ColumnSpan="3" Margin="30,0,30,0" />
+        <PersonalElements:BannerTextboxControl x:Name="CodeCaptchaBTC" BannerText="Код" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Grid.ColumnSpan="1"/>
+        <Button x:Name="EnterCaptchaB" Content="Продолжить" Style="{StaticResource RoundedButton}" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" Click="EnterCaptchaB_Click"/>
+    </Grid>
+</Window>

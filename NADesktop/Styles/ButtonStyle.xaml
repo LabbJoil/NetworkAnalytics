@@ -1,0 +1,127 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks">
+
+    <Style x:Key="RoundedButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#FF056324"/>
+        <Setter Property="FontFamily" Value="Tahoma"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="16"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="DarkSlateGray"
+                        BorderThickness="1"
+                        CornerRadius="20"
+                        Margin="5 0 5 3">
+                        <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="5,0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF0C351D"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FF06280D"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#FF5C5959"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BaseButton" TargetType="Button">
+        <Setter Property="Background" Value="#512da8" />
+        <Setter Property="Margin" Value="2 2 2 2"/>
+        <Setter Property="BorderBrush" Value="#4a148c" />
+        <Setter Property="Foreground" Value= "#ffffff" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="8 8" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#7950f2"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#7920f2"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BackButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+        <Setter Property="Background" Value="#FF056324" />
+        <Setter Property="Margin" Value="2 2 2 2"/>
+        <Setter Property="BorderBrush" Value="#FF033B15" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF033B15" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FF032C10"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RemoveButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+        <Setter Property="Background" Value="#d32f2f" />
+        <Setter Property="Margin" Value="2 2 2 2"/>
+        <Setter Property="BorderBrush" Value="#b71c1c" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#f46336" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#f40336"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DirectoryButton" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+        <Setter Property="Background" Value="#FF056324" />
+        <Setter Property="Margin" Value="2 2 2 2"/>
+        <Setter Property="BorderBrush" Value="#FF033B15" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF033B15" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FF032C10"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonIcon" TargetType="Icon:PackIconMaterial">
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+
+</ResourceDictionary>
