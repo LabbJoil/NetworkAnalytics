@@ -1,0 +1,50 @@
+﻿<Window x:Class="NADesktop.MainWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:personalElement ="clr-namespace:NADesktop.Personal_Elements"
+        xmlns:Gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+        Title="Network Analytics" Height="600" Width="1000" ResizeMode="CanMinimize" Loaded="MainWindow_Loaded" Closing="Window_Closing" Icon="/Assets/Icon/icon.png">
+
+    <Grid Background="#FF1D132E">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <personalElement:RoundControl x:Name="MenuButton" ImageLeaveButton ="/Assets/MenuButtons/MenuLeaveButton.png" ImageEnterButton ="/Assets/MenuButtons/MenuEnterButton.png"
+                             Grid.Column="1" Grid.Row="0" Width="40" Height="40" Click="InteractionMenu"/>
+
+        <Slider x:Name="MenuSlider" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Grid.RowSpan="2" Width="0" Panel.ZIndex="1" IsDirectionReversed="True" Margin="0,0,40,0">
+            <Slider.Template>
+                <ControlTemplate TargetType="Slider">
+                    <Border Background="#FF4E40CF" BorderBrush="Gray" BorderThickness="1">
+                        <StackPanel Margin="10">
+                            <Button x:Name="ProfileB" Content="Профиль" Style="{StaticResource RoundedButton}" Click="OpenEditProfile"/>
+                            <Button x:Name="ReportsB" Content="Отчёты" Style="{StaticResource RoundedButton}" Click="OpenReports"/>
+                            <Button x:Name="TelegramB" Content="Telegram" Style="{StaticResource RoundedButton}" Click="OpenTelegram"/>
+                            <Button x:Name="VKB" Content="VK" Style="{StaticResource RoundedButton}" Click="OpenVK"/>
+                            <Button x:Name="LogInSignUpB" Content="Авторизация/&#x0a;Регистрация" Style="{StaticResource RoundedButton}" Height="60" Click="OpenAuthorization" />
+                            <Button x:Name="SettingsB" Content="Настройки" Style="{StaticResource RoundedButton}" Click="OpenSettings"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Slider.Template>
+        </Slider>
+
+        <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Frame Name = "PageFrame" Panel.ZIndex="0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
+            <Button Name ="CloseSliderButton" Opacity="0.1" Visibility="Hidden" IsEnabled="False" Click="InteractionMenu" Grid.ColumnSpan="2"/>
+            <Rectangle x:Name="OverlayRectangle" Fill="DarkGray" Opacity="0.3" Visibility="Hidden" Grid.ColumnSpan="3"/>
+            <Image x:Name="LoadingGIF" Visibility="Hidden" Gif:ImageBehavior.RepeatBehavior="Forever" Height="320" Width="480"/>
+        </Grid>
+    </Grid>
+</Window>

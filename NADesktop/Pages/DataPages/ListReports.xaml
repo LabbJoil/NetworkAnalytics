@@ -1,0 +1,96 @@
+﻿<Page x:Class="NADesktop.Pages.AuthorizePages.ListReports"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="ListReports" Loaded="ListReports_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="800" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="130" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" Foreground="White" Content="Список отчетов:"/>
+
+        <DataGrid Grid.Row="2" Grid.Column="1" x:Name="ReportsDataGrid" CellStyle="{DynamicResource DataGridCellStyle}" Style="{DynamicResource DataGridStyle}" RowStyle="{DynamicResource DataGridRowStyle}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Grid.RowSpan="4">
+            <DataGrid.Columns>
+
+                <DataGridTemplateColumn x:Name="DialogColumn" Header="Диалог" IsReadOnly="True" Width="280">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Width="{Binding ActualWidth, ElementName=DialogColumn}">
+                                <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ShortDialog}"/>
+                                <Border.ToolTip>
+                                    <ToolTip Style="{StaticResource RoundedToolTipStyle}">
+                                        <TextBox Style="{StaticResource TextBoxToolTipStyle}" Text="{Binding Dialog}"/>
+                                    </ToolTip>
+                                </Border.ToolTip>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn x:Name="DateColumn" Header="Дата" IsReadOnly="True" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Width="{Binding ActualWidth, ElementName=DateColumn}">
+                                <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CreateDate}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn x:Name="NetworkColumn" Header="Соц. сеть" IsReadOnly="True" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Width="{Binding ActualWidth, ElementName=NetworkColumn}">
+                                <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SocialNetwork}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn x:Name="CountMessagesColumn" Header="Обработ. сообщения" IsReadOnly="True" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Width="{Binding ActualWidth, ElementName=CountMessagesColumn}">
+                                <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding CountMessages}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn x:Name="OperationsColumn" Width="120" Header="Операции">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel x:Name="OperationSP" Orientation="Horizontal" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Button Style="{StaticResource RemoveButton}" Tag="{Binding}" Click="DeleteReport_Click" >
+                                    <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource ButtonIcon}"/>
+                                </Button>
+                                <Button x:Name="CheckTask" Style="{StaticResource BackButton}" Tag="{Binding}" Click="ViewReport_Click">
+                                    <Icon:PackIconMaterial Kind="Eye"  Style="{StaticResource ButtonIcon}"/>
+                                </Button>
+                             </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+</Page>

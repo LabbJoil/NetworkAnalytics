@@ -1,0 +1,162 @@
+﻿<Page x:Class="NADesktop.Pages.Data.ResultAnalysis"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:LiveChart="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:personalElement="clr-namespace:NADesktop.Personal_Elements"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1000"
+      Title="ResultAnalysis" Loaded="ResultAnalysis_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid Margin="5" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Style="{StaticResource BackButton}" Tag="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click" Margin="0">
+                <Icon:PackIconMaterial Kind="ArrowLeftBold" Style="{StaticResource ButtonIcon}"/>
+            </Button>
+
+            <TextBlock Text="В каком формате сформировать отчет: " FontFamily="Tahoma" FontSize="16" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" Grid.ColumnSpan="5"/>
+            <TextBlock Text="PDF" FontFamily="Tahoma" FontSize="16" Grid.Row="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Grid.ColumnSpan="2"/>
+            <TextBlock Text="docx" FontFamily="Tahoma" FontSize="16" Grid.Row="2" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="3" Margin="10"/>
+
+            <personalElement:BannerTextboxControl x:Name="DirectoryBTC" BannerText="Папка сохранения" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="4" Width="258" NewHeight="35" NewFontSize="10"/>
+            <Button Style="{StaticResource DirectoryButton}" Tag="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OpenDirectory_Click" Margin="0" Grid.Row="4" Grid.Column="4" Width="40" Height="40">
+                <Icon:PackIconMaterial Kind="Folder" Style="{StaticResource ButtonIcon}" Width="15" Height="15"/>
+            </Button>
+
+            <personalElement:BannerTextboxControl x:Name="FileNameBTC" BannerText="Название файла" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" Grid.ColumnSpan="4" Width="258" NewHeight="35" NewFontSize="10"/>
+
+            <Button x:Name="BT" Grid.Column="0" Width="210" Height="50" Content="Сформировать отчет" Click="CreateFile_Click" Grid.Row="6" Style="{StaticResource RoundedButton}" Grid.ColumnSpan="5"/>
+
+            <ToggleButton x:Name="CheckTB" Style="{StaticResource MaterialDesignSwitchToggleButton}" Grid.Row="2" Grid.Column="2" Width="70">
+                <ToggleButton.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="Green" />
+                </ToggleButton.Resources>
+                <materialDesign:PackIcon Kind="File" />
+            </ToggleButton>
+        </Grid>
+
+        <ScrollViewer Grid.Column="1" Background="#FFBCF6DE" Margin="30 10" Grid.RowSpan="6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="320"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="320"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="320"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="200"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Аналитика с помощью сервиса&#x0a;Network Analysis" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="4" TextAlignment="Center"/>
+                    <TextBlock Text="Социальная сеть для анализа: " FontFamily="Tahoma" FontSize="12" Grid.Row="2" />
+                    <TextBlock x:Name="SocialNetworkTB" FontFamily="Tahoma" FontSize="12" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
+                    <TextBlock Text="Выбранный чат для анализа: " FontFamily="Tahoma" FontSize="12" Grid.Row="3"/>
+                    <TextBlock x:Name="DialogTB" FontFamily="Tahoma" FontSize="12" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" />
+                    <TextBlock Text="Кол-во выбранных сообщений: " FontFamily="Tahoma" FontSize="12" Grid.Row="4"/>
+                    <TextBlock x:Name="CountMessagesTB" FontFamily="Tahoma" FontSize="12" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" />
+                    <TextBlock Text="Логин: " FontFamily="Tahoma" FontSize="12" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right"/>
+                    <TextBlock Text="Дата: " FontFamily="Tahoma" FontSize="12" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="LoginTB" FontFamily="Tahoma" FontSize="12" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="DateTB" FontFamily="Tahoma" FontSize="12" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"/>
+                </Grid>
+
+                <TextBlock Text="Диаграмма вероятности тематической принадлежности" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1"/>
+                <LiveChart:PieChart x:Name="ThemChart" Margin="10" LegendLocation="Right" Width="450" Height="300" Grid.Row="2"/>
+
+                <TextBlock Text="График тональной вероятности" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3"/>
+                <LiveChart:PieChart x:Name="TonalityChart" Margin="10" LegendLocation="Right" Width="450" Height="300" Grid.Row="4" />
+
+                <TextBlock Text="Диаграмма частей речи по количеству" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="5"/>
+                <LiveChart:CartesianChart x:Name="PartsSpeechChart" Margin="10" Width="500" Height="300" Grid.Row="6">
+                    <LiveChart:CartesianChart.AxisX>
+                        <LiveChart:Axis Labels="Сущ, Дет, Прил, Част, Mест, Предл, Гл, Числ, Нареч, Междом, Симв, Другое">
+                            <LiveChart:Axis.Separator>
+                                <LiveChart:Separator Step="1"/>
+                            </LiveChart:Axis.Separator>
+                        </LiveChart:Axis>
+                    </LiveChart:CartesianChart.AxisX>
+                </LiveChart:CartesianChart>
+
+                <TextBlock Text="Топ-5 используемых слов" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="7"/>
+                <Grid Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Line X1="200" Y1="0" X2="200" Y2="170" Stroke="Black" StrokeThickness="1" Grid.ColumnSpan="2" Grid.RowSpan="6"/>
+                    <TextBlock Text="Слово" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" FontWeight="Bold"/>
+                    <Line X1="20" Y1="32" X2="400" Y2="32" Stroke="Black" StrokeThickness="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                    <TextBlock Text="Сколько раз встречалось" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" FontWeight="Bold" Grid.Column="1"/>
+
+                    <TextBlock x:Name="FirstWordTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="1"/>
+                    <TextBlock  x:Name="FirstValueTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="1" Grid.Column="1"/>
+
+                    <TextBlock x:Name="SecondWordTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="2"/>
+                    <TextBlock x:Name="SecondValueTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="2" Grid.Column="1"/>
+
+                    <TextBlock x:Name="ThirdWordTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="3"/>
+                    <TextBlock x:Name="ThirdValueTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="3" Grid.Column="1"/>
+
+                    <TextBlock x:Name="FourthWordTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="4"/>
+                    <TextBlock x:Name="FourthValueTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="4" Grid.Column="1"/>
+
+                    <TextBlock x:Name="FifthWordTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="5"/>
+                    <TextBlock x:Name="FifthValueTB" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="12" Grid.Row="5" Grid.Column="1"/>
+                </Grid>
+                
+            </Grid>
+        </ScrollViewer>
+
+    </Grid>
+</Page>
